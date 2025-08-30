@@ -8,21 +8,38 @@ export default function AddExpense() {
   const [location, setLocation] = useState<Location | undefined>();
   const [status, setStatus] = useState("Getting location...");
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setLocation({ lat: pos.coords.latitude, lon: pos.coords.longitude });
-          setStatus(
-            `Location: ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`
-          );
-        },
-        () => setStatus("Failed to get location.")
-      );
-    } else {
-      setStatus("Geolocation not supported.");
-    }
-  }, []);
+
+useEffect(() => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setLocation({ lat: pos.coords.latitude, lon: pos.coords.longitude });
+        setStatus(
+          `Location: ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`
+        );
+      },
+      () => {
+        // Fallback: IP-based geolocation
+        fetch("https://ipinfo.io/json?token=6d42da01ba666b")
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.loc) {
+              const [lat, lon] = data.loc.split(",");
+              setLocation({ lat: parseFloat(lat), lon: parseFloat(lon) });
+              setStatus(`Approximate location: ${lat}, ${lon}`);
+            } else {
+              setStatus("Failed to get location from IP.");
+            }
+          })
+          .catch(() => setStatus("Failed to get location."));
+      }
+    );
+  } else {
+    setStatus("Geolocation not supported.");
+  }
+}, []);
+
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +50,8 @@ export default function AddExpense() {
       note,
       category,
       location,
-      date: new Date().toLocaleString(),
+      date: new Date().toISOString(),
+
     };
 
     const existing = JSON.parse(localStorage.getItem("expenses") || "[]");

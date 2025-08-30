@@ -7,6 +7,18 @@ import { Expense } from "../types";
 import "./ViewExpenses.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
+
+const customIcon = L.divIcon({
+  html: `<div class="custom-marker"></div>`,
+  className: "",
+  iconSize: [20, 20],
+  iconAnchor: [10, 10],
+  popupAnchor: [0, -10],
+});
+
+
 
 export default function ViewExpenses() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
@@ -91,7 +103,7 @@ export default function ViewExpenses() {
           attribution='&copy; OpenStreetMap contributors'
         />
 
-        <Marker position={[selectedExpense.location.lat, selectedExpense.location.lon]}>
+        <Marker position={[selectedExpense.location.lat, selectedExpense.location.lon]} icon={customIcon}>
           <Popup>
             {selectedExpense.category} – ${selectedExpense.amount}
           </Popup>

@@ -1,0 +1,65 @@
+/* AddExpense.css */
+
+.add-expense-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", sans-serif;
+}
+
+.add-expense-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.add-expense-form input,
+.add-expense-form select {
+  display: block;
+  width: 90%;
+  margin: 12px auto; /* centers horizontally */
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.add-expense-form input:focus,
+.add-expense-form select:focus {
+  border-color: #4f46e5;
+  outline: none;
+  box-shadow: 0 0 6px rgba(79, 70, 229, 0.3);
+}
+
+.add-expense-form button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.add-expense-form button:hover {
+  background: linear-gradient(135deg, #4338ca, #4f46e5);
+  transform: scale(1.02);
+}
+
+.add-expense-status {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}

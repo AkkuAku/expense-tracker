@@ -1,13 +1,21 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AddExpense from "./pages/AddExpense";
 import ViewExpenses from "./pages/ViewExpenses";
+import "./Navbar.css";
 
 function App() {
   return (
     <Router>
-      <nav style={{ padding: "10px", background: "#eee" }}>
-        <Link to="/" style={{ marginRight: "10px" }}>Add Expense</Link>
-        <Link to="/expenses">View Expenses</Link>
+      <nav className="navbar">
+        <div className="navbar-logo">Expense Tracker</div>
+        <ul className="navbar-links">
+          <li>
+            <Link to="/">Add Expense</Link>
+          </li>
+          <li>
+            <Link to="/expenses">View Expenses</Link>
+          </li>
+        </ul>
       </nav>
       <Routes>
         <Route path="/" element={<AddExpense />} />

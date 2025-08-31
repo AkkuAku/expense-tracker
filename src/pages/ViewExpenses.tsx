@@ -1,5 +1,4 @@
 
-// ViewExpenses.tsx
 import MapUpdater from "./MapUpdater";
 
 import { useEffect, useState } from "react";
@@ -37,11 +36,15 @@ export default function ViewExpenses() {
       })
     : expenses;
 
+
+  
+
+
   const total = filtered.reduce((sum, exp) => sum + exp.amount, 0);
 
   return (
     <div className="expenses-layout">
-  {/* Панель карточек слева */}
+  
   <div className="sidebar">
     <h2 className="title">Expenses</h2>
 
@@ -90,7 +93,6 @@ export default function ViewExpenses() {
     </div>
   </div>
 
-  {/* Карта справа на весь экран */}
   <div className="map-container">
     {selectedExpense && selectedExpense.location ? (
       <MapContainer
